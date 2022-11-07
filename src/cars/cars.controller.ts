@@ -25,7 +25,7 @@ export class CarsController {
   }
 
   @Get(':id')
-  getCarById(@Param('id', ParseIntPipe) id: number): IResponse {
+  getCarById(@Param('id') id: string): IResponse {
     return {
       status: 200,
       data: this._carsService.findById(id),

@@ -1,15 +1,15 @@
-type IResponse = {
+interface IResponse {
   status: number;
   data: any;
 };
 
-type IData = {
-  id: number;
+interface IData {
+  id: string;
   brand: string;
   model: string;
 };
 
-type IBody = {
+interface IBody {
   brand: string;
   model: string;
 };
