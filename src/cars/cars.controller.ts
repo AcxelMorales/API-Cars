@@ -37,9 +37,11 @@ export class CarsController {
 
   @Post()
   createCar(@Body() createCarDto: CreateCarDto): IResponse {
+    const data = this._carsService.createCar(createCarDto);
+
     return {
       status: 200,
-      data: createCarDto,
+      data,
     };
   }
 
