@@ -8,8 +8,3 @@ interface IData {
   brand: string;
   model: string;
 };
-
-interface IBody {
-  brand: string;
-  model: string;
-};

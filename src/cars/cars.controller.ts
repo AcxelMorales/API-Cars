@@ -12,6 +12,8 @@ import {
 
 import { CarsService } from './cars.service';
 
+import { CreateCarDto } from './dto/create-car.dto';
+
 @Controller('cars')
 export class CarsController {
 
@@ -34,17 +36,17 @@ export class CarsController {
   }
 
   @Post()
-  createCar(@Body() body: IBody): IResponse {
+  createCar(@Body() createCarDto: CreateCarDto): IResponse {
     return {
       status: 200,
-      data: 'Car created',
+      data: createCarDto,
     };
   }
 
   @Patch(':id')
   updateCar(
     @Param('id', ParseIntPipe) id: number,
-    @Body() body: IBody,
+    @Body() body: any,
   ): IResponse {
     return {
       status: 200,
