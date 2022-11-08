@@ -13,6 +13,7 @@ import {
 import { CarsService } from './cars.service';
 
 import { CreateCarDto } from './dto/create-car.dto';
+import { UpdateCarDto } from './dto/update-cat.dto';
 
 @Controller('cars')
 export class CarsController {
@@ -47,12 +48,14 @@ export class CarsController {
 
   @Patch(':id')
   updateCar(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() body: any,
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() updateCarDto: UpdateCarDto,
   ): IResponse {
+    const data = this._carsService.updateCar(id, updateCarDto);
+
     return {
       status: 200,
-      data: 'Car updated',
+      data,
     };
   }
 
