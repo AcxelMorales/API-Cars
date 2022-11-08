@@ -4,7 +4,6 @@ import {
   Delete,
   Get,
   Param,
-  ParseIntPipe,
   ParseUUIDPipe,
   Patch,
   Post,
@@ -13,6 +12,7 @@ import {
 import { CarsService } from './cars.service';
 
 import { CreateCarDto } from './dto/create-car.dto';
+import { UpdateCarDto } from './dto/update-cat.dto';
 
 @Controller('cars')
 export class CarsController {
@@ -37,25 +37,31 @@ export class CarsController {
 
   @Post()
   createCar(@Body() createCarDto: CreateCarDto): IResponse {
+    const data = this._carsService.createCar(createCarDto);
+
     return {
       status: 200,
-      data: createCarDto,
+      data,
     };
   }
 
   @Patch(':id')
   updateCar(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() body: any,
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() updateCarDto: UpdateCarDto,
   ): IResponse {
+    const data = this._carsService.updateCar(id, updateCarDto);
+
     return {
       status: 200,
-      data: 'Car updated',
+      data,
     };
   }
 
   @Delete(':id')
-  deleteCar(@Param('id', ParseIntPipe) id: number): IResponse {
+  deleteCar(@Param('id', ParseUUIDPipe) id: string): IResponse {
+    this._carsService.deleteCar(id);
+
     return {
       status: 200,
       data: 'Car deleted',
